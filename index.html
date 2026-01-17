@@ -236,6 +236,45 @@
             /* Ensure text wraps nicely */
             .hero-stats { justify-content: center; flex-wrap: wrap;}
         }
+
+        /* --- DESKTOP STYLES (Add this near the top of CSS) --- */
+.hamburger { 
+    display: none; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+    color: var(--sf-dark); 
+}
+
+/* --- MOBILE STYLES (Add inside @media (max-width: 768px)) --- */
+@media (max-width: 768px) {
+    /* Show the Hamburger Icon */
+    .hamburger { display: block; }
+    
+    /* Hide the menu links by default */
+    .nav-links {
+        position: absolute;
+        top: 70px; /* Pushes it below the navbar */
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        display: none; /* HIDDEN INITIALLY */
+    }
+    
+    /* This class is added by JavaScript to show the menu */
+    .nav-links.active { 
+        display: flex; 
+    }
+    
+    .nav-links a { 
+        margin: 15px 0; 
+        font-size: 1.1rem; 
+        display: block;
+    }
+}
     </style>
 </head>
 <body>
@@ -247,15 +286,19 @@
     </div>
 
     <nav>
-        <div class="logo">Bharath U.</div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#skills">Expertise</a>
-            <a href="#projects">Projects</a>
-            <a href="#experience">Journey</a>
-            <a href="mailto:bharathshetru@gmail.com" class="btn-nav">Contact</a>
-        </div>
-    </nav>
+    <div class="logo">Bharath U.</div>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#skills" onclick="toggleMenu()">Expertise</a>
+        <a href="#experience" onclick="toggleMenu()">Journey</a>
+        <a href="mailto:bharathshetru@gmail.com" class="btn-nav">Contact</a>
+    </div>
+</nav>
 
     <section class="hero" id="about">
         <div class="container hero-grid">
@@ -456,6 +499,11 @@
     </section>
 
     <script>
+
+        function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    navLinks.classList.toggle('active');
+}
         // 1. Typewriter Effect
         const textElement = document.getElementById('typewriter');
         const phrases = ["Senior Salesforce Developer.", "Certified Application Architect.", "Agentforce Specialist.","Javascript Developer"];
